@@ -744,6 +744,102 @@
                     "TotalRandSubset": ""
                 }
             }
+        },
+        {
+            "SurveyID": "SV_82GxylVdVIF3r7v",
+            "Element": "SQ",
+            "PrimaryAttribute": "QID1",
+            "SecondaryAttribute": "Which sample sounds the most similar to the reference speech?",
+            "TertiaryAttribute": null,
+            "Payload": {
+                "QuestionText": "Which sample sounds the most similar to the reference speech?",
+                "DataExportTag": "Q1",
+                "QuestionType": "MC",
+                "Selector": "SAVR",
+                "SubSelector": "TX",
+                "Configuration": {
+                    "QuestionDescriptionOption": "UseText"
+                },
+                "QuestionDescription": "ab choice based on similarity to reference",
+                "Choices": {
+                    "1": {
+                        "Display": "sample 1"
+                    },
+                    "2": {
+                        "Display": "sample2"
+                    }
+                },
+                "ChoiceOrder": [
+                    1,
+                    2
+                ],
+                "Validation": {
+                    "Settings": {
+                        "ForceResponse": "ON",
+                        "ForceResponseType": "ON",
+                        "Type": "None"
+                    }
+                },
+                "Language": [],
+                "NextChoiceId": 3,
+                "NextAnswerId": 1,
+                "QuestionID": "QID1",
+                "Randomization": {
+                    "Advanced": null,
+                    "Type": "All",
+                    "TotalRandSubset": ""
+                }
+            }
+        },
+        {
+            "SurveyID": "SV_82GxylVdVIF3r7v",
+            "Element": "SQ",
+            "PrimaryAttribute": "QID1",
+            "SecondaryAttribute": "Which sample sounds the most similar to the reference speech?",
+            "TertiaryAttribute": null,
+            "Payload": {
+                "QuestionText": "Which sample sounds the most similar to the reference speech?",
+                "DataExportTag": "Q1",
+                "QuestionType": "RO",
+                "Selector": "DND",
+                "SubSelector": "TX",
+                "Configuration": {
+                    "QuestionDescriptionOption": "UseText"
+                },
+                "QuestionDescription": "ranking abc based on similarity to reference",
+                "Choices": {
+                    "1": {
+                        "Display": "sample 1"
+                    },
+                    "2": {
+                        "Display": "sample2"
+                    },
+                    "3": {
+                        "Display": "sample3"
+                    }
+                },
+                "ChoiceOrder": [
+                    1,
+                    2,
+                    3
+                ],
+                "Validation": {
+                    "Settings": {
+                        "ForceResponse": "ON",
+                        "ForceResponseType": "ON",
+                        "Type": "None"
+                    }
+                },
+                "Language": [],
+                "NextChoiceId": 4,
+                "NextAnswerId": 1,
+                "QuestionID": "QID1",
+                "Randomization": {
+                    "Advanced": null,
+                    "Type": "All",
+                    "TotalRandSubset": ""
+                }
+            }
         }
     ]
 }

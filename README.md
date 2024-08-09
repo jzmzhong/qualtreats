@@ -25,6 +25,8 @@ This is not supported in any way by Qualtrics and is 100% unofficial.
 It currently supports:
 - A/B preference questions (‘Which speech sample sounds more natural?’)
 - A/B/C preference questions (as above but with 3 choices)
+- X A/B preference questions (‘Which of the following sounds more similar to the reference speech?’)
+- X A/B/C preference questions (as above but with 3 choices)
 - Multiple choice questions (‘Does this speech sample contain any errors?’)
 - Transcription questions (‘Listen to this audio clip and type what you hear.’)
 - MUSHRA style questions (MUltiple Stimuli with Hidden Reference and Anchor)
@@ -96,6 +98,8 @@ The script is run from the command line, using flags to specify the desired ques
 Flags:
 - `-ab` = A/B preference
 - `-abc` = A/B/C preference
+- `-xab` = X A/B preference
+- `-xabc` = X A/B/C preference
 - `-mc` = multiple choice
 - `-trs` = audio transcription
 - `-mushra` = MUSHRA

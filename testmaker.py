@@ -11,7 +11,6 @@ import config
 
 # new template files can be created in Qualtrics by creating a
 # question with your specifications and exporting the survey file
-# json_filename = "combined-template.json"
 json_filename = "combined-template.json"
 save_as = "output-survey.qsf"
 # audio templates should not be changed
@@ -35,18 +34,26 @@ def get_play_button(url, n): # player n associates play button with a specific a
         return Template(html_file.read()).substitute(url=url, player=n)
 
 # makes lists of formatted urls from the filenames in the config file
-def format_urls(question_type, file_1, file_2=None, file_3=None):
+def format_urls(question_type, file_1, file_2=None, file_3=None, file_4=None):
     with open(file_1) as f1:
         try:
             with open(file_2) as f2: # only -ab & -abc have >1 url file
                 # helper lambda saves some code later on "gf" means get first
                 gf = lambda x: x.split()[1]
-                if question_type == 'ab': # returns list of url pairs
-                    return [(gf(line1),gf(line2))for line1, line2 in zip(f1,f2)], []
-                elif question_type == 'abc':
+                if question_type == 'xab':
+                    with open(file_3) as f_ref:
+                        extra = [gf(line) for line in f_ref]
+                elif question_type == 'xabc':
+                    with open(file_4) as f_ref:
+                        extra = [gf(line) for line in f_ref]
+                else:
+                    extra = []
+                if question_type in ['ab', 'xab']: # returns list of url pairs
+                    return [(gf(line1),gf(line2))for line1, line2 in zip(f1,f2)], extra
+                elif question_type in ['abc', 'xabc']:
                     with open(file_3) as f3: # returns list of url trios & empty list
                         return [(gf(line1),gf(line2),gf(line3))
-                                for line1, line2, line3 in zip(f1, f2, f3)], []
+                                for line1, line2, line3 in zip(f1, f2, f3)], extra
         except:
             if question_type == 'mos' or question_type == 'trs':
                 return [l for l in f1], []
@@ -158,6 +165,10 @@ def main():
                         help="make MUSHRA questions with sliders")
     parser.add_argument("-mos", action='store_true',
                         help="make Mean Opinion Score questions with sliders")
+    parser.add_argument("-xab", action='store_true',
+                        help="make A/B questions (like preference test) with reference speech")
+    parser.add_argument("-xabc", action='store_true',
+                        help="make A/B/C questions (like ranking test) with reference speech")
 
     args = parser.parse_args()
 
@@ -170,7 +181,9 @@ def main():
                      'mc':[config.mc_file],
                      'trs':[config.trs_file],
                      'mushra':[config.mushra_files],
-                     'mos':[config.mos_file]
+                     'mos':[config.mos_file],
+                     'xab':[config.xab_file1, config.xab_file2, config.xab_file_ref],
+                     'xabc':[config.xabc_file1, config.xabc_file2, config.xabc_file3, config.xabc_file_ref],
                      }
     # create a dictionary with key=command line arg & value= output of format_urls()
     # function's arguments are taken from argument_dict
@@ -203,7 +216,10 @@ def main():
                            'trs':elements[12],
                            'abc': elements[14],
                            'mushra': elements[10],
-                           'mos':elements[11]}
+                           'mos':elements[11],
+                           'xab': elements[15],
+                           'xabc': elements[16],
+                           }
 
     # update multiple choice answer text in template to save computation
     (basis_question_dict['mc']['Payload']['Choices']
@@ -232,7 +248,12 @@ def main():
                     'mushra': f"{config.mushra_question_text}\
                                 {get_play_button('$ref_url', '$ref_id')}",
                     'mos': f"{config.mos_question_text}\
-                             {get_player_html('$urls')}" }
+                             {get_player_html('$urls')}",
+                    'xab': f"{config.xab_question_text}\
+                                {get_player_html('$ref_url')}",
+                    'xabc': f"{config.xab_question_text}\
+                                {get_player_html('$ref_url')}",
+                  }
 
     # keys=question types and values= functions for making questions
     handler_dict = {'ab': ab_q,
@@ -240,7 +261,10 @@ def main():
                     'mc': None,
                     'trs': None,
                     'mushra': mushra_q,
-                    'mos': None}
+                    'mos': None,
+                    'xab': ab_q,
+                    'xabc': ab_q,
+                    }
 
     # create list to store generated question blocks
     questions = []
@@ -248,18 +272,18 @@ def main():
     # create counters to use when indexing optional lists
     q_counter = 1 # qualtrics question numbering starts at 1
     mc_counter = 0
-    mushra_counter = 0
+    ref_counter = 0
 
     for arg in args:
         for n, url_set in enumerate(url_dict[arg]['urls']): # for each url set for that question type
-            # get MUSHRA reference url if the current flag == -mushra
-            ref_url = url_dict['mushra']['extra'][mushra_counter] if arg == 'mushra' else None
+            # get reference url if the current flag is -mushra or -xab or -xabc
+            ref_url = url_dict[arg]['extra'][ref_counter] if arg in ['mushra', 'xab', 'xabc'] else None
             # get MC sentence if the current flag == -mc
             sentence = mc_sentences[url_dict['mc']['extra'][mc_counter]] if arg == 'mc' else None
-            mushra_ref_id = n*(len(url_set)+1) # unique id for every ref sample
+            ref_id = n*(len(url_set)+1) # unique id for every ref sample
             # embed required url or sentence into the question text
             text = Template(q_text_dict[arg]).substitute(ref_url=ref_url,
-                                                         ref_id=mushra_ref_id,
+                                                         ref_id=ref_id,
                                                          urls=url_set,
                                                          sentence=sentence
                                                          )
@@ -281,8 +305,8 @@ def main():
             # except for the last question (to prevent IndexError)
             mc_counter += (1 if arg == 'mc' and
                            mc_counter+1 < len(url_dict['mc']['urls']) else 0)
-            mushra_counter += (1 if arg == 'mushra' and
-                               mushra_counter+1 < len(url_dict['mushra']['urls']) else 0)
+            ref_counter += (1 if arg in ['mushra', 'xab', 'xabc'] and
+                               ref_counter+1 < len(url_dict[arg]['urls']) else 0)
 
     # survey_length is determined by number of questions created
     survey_length = len(questions)
