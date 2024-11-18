@@ -1020,6 +1020,94 @@
                 },
                 "QuestionID": "QID4"
             }
+        },
+        {
+            "SurveyID": "SV_cwkje2x4cnOO9Qa",
+            "Element": "SQ",
+            "PrimaryAttribute": "QID1",
+            "SecondaryAttribute": "Listen carefully to all speech recordings below in full. Then rank the candidate speech recording...",
+            "TertiaryAttribute": null,
+            "Payload": {
+                "QuestionText": "Listen carefully to all speech recordings below in full. Then rank the candidate speech recordings based on their <u><em>similarity</em></u> to the reference speech recording in terms of <em><u>accent</u></em>. Please disregard the mismatch in voice, gender, and audio quality.<br>\nHere is the reference speech recording:\n<audio width=\"320\" preload=\"auto\" height=\"40\" controls=\"true\" class=\"qmedia\"><source type=\"audio/wav\" src=\"https://groups.inf.ed.ac.uk/cstr3/s2526235/listening_tests/accent-evaluation/gt_22.05k/Edinburgh/p262/p262_002_mic1.wav\"></audio>\n<br>\nHere are the candidate speech recordings to be ranked.",
+                "DefaultChoices": false,
+                "DataExportTag": "Q1",
+                "QuestionID": "QID1",
+                "QuestionType": "Matrix",
+                "Selector": "Likert",
+                "DataVisibility": {
+                    "Private": false,
+                    "Hidden": false
+                },
+                "Configuration": {
+                    "QuestionDescriptionOption": "UseText",
+                    "TextPosition": "inline",
+                    "ChoiceColumnWidth": 25,
+                    "RepeatHeaders": "none",
+                    "WhiteSpace": "OFF",
+                    "MobileFirst": true
+                },
+                "QuestionDescription": "Listen carefully to all speech recordings below in full. Then rank the candidate speech recording...",
+                "Choices": {
+                    "1": {
+                        "Display": "<audio class=\"qmedia\" controls=\"true\" height=\"40\" preload=\"auto\" width=\"320\"><source src=\"https://groups.inf.ed.ac.uk/cstr3/s2526235/listening_tests/accent-evaluation/gt_22.05k/Edinburgh/p252/p252_002_mic1.wav\" type=\"audio/wav\" /><embed class=\"qmedia\" flashconsts=\"file=https\\://groups.inf.ed.ac.uk/cstr3/s2526235/listening_tests/accent-evaluation/gt_22.05k/Edinburgh/p252/p252_002_mic1.wav&amp;width=320&amp;height=20&amp;type=wav&amp;autostart=false\" height=\"20\" pluginspage=\"http\\://adobe.com/flashplayer/\" src=\"/WRQualtricsShared/Flash/flvplayer.swf\" type=\"application/x-shockwave-flash\" width=\"320\" wmode=\"transparent\" /></audio>",
+                        "ExclusiveAnswer": true
+                    },
+                    "2": {
+                        "Display": "<audio class=\"qmedia\" controls=\"true\" height=\"40\" preload=\"auto\" width=\"320\"><source src=\"https://groups.inf.ed.ac.uk/cstr3/s2526235/listening_tests/accent-evaluation/gt_22.05k/Edinburgh/p272/p272_002_mic1.wav\" type=\"audio/wav\" /><embed class=\"qmedia\" flashconsts=\"file=https\\://groups.inf.ed.ac.uk/cstr3/s2526235/listening_tests/accent-evaluation/gt_22.05k/Edinburgh/p272/p272_002_mic1.wav&amp;width=320&amp;height=20&amp;type=wav&amp;autostart=false\" height=\"20\" pluginspage=\"http\\://adobe.com/flashplayer/\" src=\"/WRQualtricsShared/Flash/flvplayer.swf\" type=\"application/x-shockwave-flash\" width=\"320\" wmode=\"transparent\" /></audio>\n",
+                        "ExclusiveAnswer": true
+                    },
+                    "3": {
+                        "Display": "<audio class=\"qmedia\" controls=\"true\" height=\"40\" preload=\"auto\" width=\"320\"><source src=\"https://groups.inf.ed.ac.uk/cstr3/s2526235/listening_tests/accent-evaluation/gt_22.05k/Edinburgh/p281/p281_002_mic1.wav\" type=\"audio/wav\" /><embed class=\"qmedia\" flashconsts=\"file=https\\://groups.inf.ed.ac.uk/cstr3/s2526235/listening_tests/accent-evaluation/gt_22.05k/Edinburgh/p281/p281_002_mic1.wav&amp;width=320&amp;height=20&amp;type=wav&amp;autostart=false\" height=\"20\" pluginspage=\"http\\://adobe.com/flashplayer/\" src=\"/WRQualtricsShared/Flash/flvplayer.swf\" type=\"application/x-shockwave-flash\" width=\"320\" wmode=\"transparent\" /></audio>",
+                        "ExclusiveAnswer": true
+                    },
+                    "4": {
+                        "Display": "<audio class=\"qmedia\" controls=\"true\" height=\"40\" preload=\"auto\" width=\"320\"><source src=\"https://groups.inf.ed.ac.uk/cstr3/s2526235/listening_tests/accent-evaluation/gt_22.05k/Edinburgh/p285/p285_002_mic1.wav\" type=\"audio/wav\" /><embed class=\"qmedia\" flashconsts=\"file=https\\://groups.inf.ed.ac.uk/cstr3/s2526235/listening_tests/accent-evaluation/gt_22.05k/Edinburgh/p285/p285_002_mic1.wav&amp;width=320&amp;height=20&amp;type=wav&amp;autostart=false\" height=\"20\" pluginspage=\"http\\://adobe.com/flashplayer/\" src=\"/WRQualtricsShared/Flash/flvplayer.swf\" type=\"application/x-shockwave-flash\" width=\"320\" wmode=\"transparent\" /></audio>",
+                        "ExclusiveAnswer": true
+                    }
+                },
+                "ChoiceOrder": [
+                    1,
+                    2,
+                    3,
+                    4
+                ],
+                "Validation": {
+                    "Settings": {
+                        "ForceResponse": "OFF",
+                        "Type": "None"
+                    }
+                },
+                "GradingData": [],
+                "Language": [],
+                "NextChoiceId": 5,
+                "NextAnswerId": 6,
+                "Answers": {
+                    "1": {
+                        "Display": "The Most Similar in Accent",
+                        "ExclusiveAnswer": true
+                    },
+                    "2": {
+                        "Display": "2nd Most Similar in Accent",
+                        "ExclusiveAnswer": true
+                    },
+                    "3": {
+                        "Display": "3rd Most Similar in Accent"
+                    },
+                    "4": {
+                        "Display": "The Least Similar in Accent"
+                    }
+                },
+                "AnswerOrder": [
+                    1,
+                    2,
+                    3,
+                    4
+                ],
+                "ChoiceDataExportTags": false,
+                "AnswerColumns": 4,
+                "ClarifyingSymbolType": "None",
+                "SubSelector": "SingleAnswer"
+            }
         }
     ]
 }

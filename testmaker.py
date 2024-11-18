@@ -34,7 +34,7 @@ def get_play_button(url, n): # player n associates play button with a specific a
         return Template(html_file.read()).substitute(url=url, player=n)
 
 # makes lists of formatted urls from the filenames in the config file
-def format_urls(question_type, file_1, file_2=None, file_3=None, file_4=None):
+def format_urls(question_type, file_1, file_2=None, file_3=None, file_4=None, file_5=None):
     with open(file_1) as f1:
         try:
             with open(file_2) as f2: # only -ab & -abc have >1 url file
@@ -45,6 +45,9 @@ def format_urls(question_type, file_1, file_2=None, file_3=None, file_4=None):
                         extra = [gf(line) for line in f_ref]
                 elif question_type == 'xabc':
                     with open(file_4) as f_ref:
+                        extra = [gf(line) for line in f_ref]
+                elif question_type == 'xabcd':
+                    with open(file_5) as f_ref:
                         extra = [gf(line) for line in f_ref]
                 elif question_type == 'xmos':
                     with open(file_2) as f_ref:
@@ -57,6 +60,11 @@ def format_urls(question_type, file_1, file_2=None, file_3=None, file_4=None):
                     with open(file_3) as f3: # returns list of url trios & empty list
                         return [(gf(line1), gf(line2), gf(line3))
                                 for line1, line2, line3 in zip(f1, f2, f3)], extra
+                elif question_type in ['abcd', 'xabcd']:
+                    with open(file_3) as f3:
+                        with open(file_4) as f4:
+                            return [(gf(line1), gf(line2), gf(line3), gf(line4))
+                                    for line1, line2, line3, line4 in zip(f1, f2, f3, f4)], extra
                 elif question_type == 'xmos':
                     return [gf(line1) for line1 in f1], extra
         except:
@@ -174,6 +182,8 @@ def main():
                         help="make A/B questions (like preference test) with reference speech")
     parser.add_argument("-xabc", action='store_true',
                         help="make A/B/C questions (like ranking test) with reference speech")
+    parser.add_argument("-xabcd", action='store_true',
+                        help="make A/B/C/D questions (like ranking test) with reference speech")
     parser.add_argument("-xmos", action='store_true',
                         help="make Mean Opinion Score questions with sliders and with reference speech")
     parser.add_argument("-xcmos", action='store_true',
@@ -193,6 +203,7 @@ def main():
                      'mos':[config.mos_file],
                      'xab':[config.xab_file1, config.xab_file2, config.xab_file_ref],
                      'xabc':[config.xabc_file1, config.xabc_file2, config.xabc_file3, config.xabc_file_ref],
+                     'xabcd':[config.xabcd_file1, config.xabcd_file2, config.xabcd_file3, config.xabcd_file4, config.xabcd_file_ref],
                      'xmos':[config.xmos_file, config.xmos_file_ref],
                      'xcmos':[config.xcmos_file1, config.xcmos_file2, config.xcmos_file_ref],
                      }
@@ -229,6 +240,7 @@ def main():
                            'mos':elements[11],
                            'xab': elements[15],
                            'xabc': elements[16],
+                           'xabcd': elements[19],
                            'xmos': elements[17],
                            'xcmos': elements[18],
                            }
@@ -265,6 +277,8 @@ def main():
                                 {get_player_html('$ref_url')}",
                     'xabc': f"{config.xab_question_text}\
                                 {get_player_html('$ref_url')}",
+                    'xabcd': f"{config.xab_question_text}\
+                                {get_player_html('$ref_url')}",
                     'xmos': f"{config.xmos_question_text_1}\
                                 {get_player_html('$ref_url')}\
                                 {config.xmos_question_text_2}\
@@ -286,6 +300,7 @@ def main():
                     'mos': None,
                     'xab': ab_q,
                     'xabc': ab_q,
+                    'xabcd': ab_q,
                     'xmos': None,
                     'xcmos': None,
                     }
@@ -301,7 +316,7 @@ def main():
     for arg in args:
         for n, url_set in enumerate(url_dict[arg]['urls']): # for each url set for that question type
             # get reference url if the current flag is -mushra or -xab or -xabc
-            ref_url = url_dict[arg]['extra'][ref_counter] if arg in ['mushra', 'xab', 'xabc', 'xmos', 'xcmos'] else None
+            ref_url = url_dict[arg]['extra'][ref_counter] if arg in ['mushra', 'xab', 'xabc', 'xabcd', 'xmos', 'xcmos'] else None
             # get MC sentence if the current flag == -mc
             sentence = mc_sentences[url_dict['mc']['extra'][mc_counter]] if arg == 'mc' else None
             ref_id = n*(len(url_set)+1) # unique id for every ref sample

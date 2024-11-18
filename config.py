@@ -12,6 +12,9 @@ mos_question_text = "Listen to this speech sample, then rate the quality of the 
 xab_question_text = "Which of the following sounds more similar to the reference speech?"
 xmos_question_text_1 = "Listen carefully to all speech recordings below in full. Then rate <i><u>how similar</u></i> the <i><u>accent</u></i> of the candidate speech recording is to the reference speech recording on a scale of 1 (completely different accent) to 5 (identical accent). Please disregard the mismatch in voice, gender, and audio quality.<br />Here is the reference speech recording:"
 xmos_question_text_2 = "<br />Here is the candidate speech recording:"
+xcmos_question_text_1 = "Listen carefully to all speech recordings below in full. Then rate <i><u>how much more or less similar</u></i> recording A is in terms of <i><u>accent</u></i> to the reference speech recording, compared to recording B. A score of +2 indicates that recording A is much more similar to the reference than recording B is, whereas -2 indicates that recording B is more similar to the reference. Please disregard the mismatch in voice, gender, and audio quality.<br />Here is the reference speech recording:"
+xcmos_question_text_2 = "<br />Here is speech recording A:"
+xcmos_question_text_3 = "<br />Here is speech recording B:"
 # the answer options for multiple choice questions
 mc_choice_text = ['Yes', 'No']
 
@@ -32,8 +35,16 @@ xabc_file1 = "resources/xabc-urls-1.txt"
 xabc_file2 = "resources/xabc-urls-2.txt"
 xabc_file3 = "resources/xabc-urls-3.txt"
 xabc_file_ref = "resources/xabc-urls-ref.txt"
+xabcd_file1 = "resources/xabcd-urls-1.txt"
+xabcd_file2 = "resources/xabcd-urls-2.txt"
+xabcd_file3 = "resources/xabcd-urls-3.txt"
+xabcd_file4 = "resources/xabcd-urls-4.txt"
+xabcd_file_ref = "resources/xabcd-urls-ref.txt"
 xmos_file = "resources/xmos-urls.txt"
 xmos_file_ref = "resources/xmos-urls-ref.txt"
+xcmos_file1 = "resources/xcmos-urls-1.txt"
+xcmos_file2 = "resources/xcmos-urls-2.txt"
+xcmos_file_ref = "resources/xcmos-urls-ref.txt"
 # mushra filenames should be the same across folders
 # audiofile urls should vary only by folder name
 # any number of folders can be specified
