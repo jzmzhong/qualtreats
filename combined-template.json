@@ -1073,7 +1073,8 @@
                 ],
                 "Validation": {
                     "Settings": {
-                        "ForceResponse": "OFF",
+                        "ForceResponse": "ON",
+                        "ForceResponseType": "ON",
                         "Type": "None"
                     }
                 },
