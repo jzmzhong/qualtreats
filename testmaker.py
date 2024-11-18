@@ -278,7 +278,8 @@ def main():
                     'xabc': f"{config.xab_question_text}\
                                 {get_player_html('$ref_url')}",
                     'xabcd': f"{config.xab_question_text}\
-                                {get_player_html('$ref_url')}",
+                                {get_player_html('$ref_url')}\
+                                {config.xab_question_text_2}",
                     'xmos': f"{config.xmos_question_text_1}\
                                 {get_player_html('$ref_url')}\
                                 {config.xmos_question_text_2}\
