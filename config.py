@@ -10,7 +10,8 @@ trs_question_text = "Please type the sentence you hear in this audio sample."
 mushra_question_text = "How natural are the following speech recordings? <br> Reference: "
 mos_question_text = "Listen to this speech sample, then rate the quality of the speech."
 xab_question_text = "Which of the following sounds more similar to the reference speech?"
-# xab_question_text = "Listen carefully to all speech recordings below in full by clicking the play buttons. Then based on SPEAKER SIMILARITY (i.e. how similar to the reference speech recording in terms of speaker identity), drag the options in the order from the MOST to the LEAST SIMILAR in SPEAKER IDENTITY."
+xmos_question_text_1 = "Listen carefully to all speech recordings below in full. Then rate <i><u>how similar</u></i> the <i><u>accent</u></i> of the candidate speech recording is to the reference speech recording on a scale of 1 (completely different accent) to 5 (identical accent). Please disregard the mismatch in voice, gender, and audio quality.<br />Here is the reference speech recording:"
+xmos_question_text_2 = "<br />Here is the candidate speech recording:"
 # the answer options for multiple choice questions
 mc_choice_text = ['Yes', 'No']
 
@@ -31,6 +32,8 @@ xabc_file1 = "resources/xabc-urls-1.txt"
 xabc_file2 = "resources/xabc-urls-2.txt"
 xabc_file3 = "resources/xabc-urls-3.txt"
 xabc_file_ref = "resources/xabc-urls-ref.txt"
+xmos_file = "resources/xmos-urls.txt"
+xmos_file_ref = "resources/xmos-urls-ref.txt"
 # mushra filenames should be the same across folders
 # audiofile urls should vary only by folder name
 # any number of folders can be specified

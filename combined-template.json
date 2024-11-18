@@ -840,6 +840,97 @@
                     "TotalRandSubset": ""
                 }
             }
+        },
+        {
+            "SurveyID": "SV_5dLVDkYeZAKBTJY",
+            "Element": "SQ",
+            "PrimaryAttribute": "QID1",
+            "SecondaryAttribute": "Listen carefully to all speech recordings below in full. Then rate how similar the accent of the...",
+            "TertiaryAttribute": null,
+            "Payload": {
+                "QuestionText": "Listen carefully to all speech recordings below in full. Then rate <u><em>how similar</em></u> the <u><em>accent</em></u> of the candidate speech recording is to the reference speech recording on a scale of 1 (completely different accent) to 5 (identical accent). Please disregard the mismatch in voice, gender, and audio quality.<br />\nHere is the reference speech recording: <audio class=\"qmedia\" controls=\"true\" height=\"40\" preload=\"auto\" width=\"320\"><source src=\"https://groups.inf.ed.ac.uk/cstr3/cvbotinh/Mushra_example/samples/M/hvd_481.wav\" type=\"audio/wav\" /></audio><br />\nHere is the candidate speech recording to rate: <audio class=\"qmedia\" controls=\"true\" height=\"40\" preload=\"auto\" width=\"320\"><source src=\"https://groups.inf.ed.ac.uk/cstr3/cvbotinh/Mushra_example/samples/MM/hvd_481.wav\" type=\"audio/wav\" /></audio>",
+                "QuestionJS": "Qualtrics.SurveyEngine.addOnload(function()\n{\n\t/*Place your JavaScript here to run when the page loads*/\n\njQuery(\"td\").css(\"border-left\",\"2px solid WhiteSmoke\");\n});\n\nQualtrics.SurveyEngine.addOnReady(function()\n{\n\t/*Place your JavaScript here to run when the page is fully displayed*/\n\n});\n\nQualtrics.SurveyEngine.addOnUnload(function()\n{\n\t/*Place your JavaScript here to run when the page is unloaded*/\n\n});",
+                "DefaultChoices": false,
+                "DataExportTag": "XMOS/SMOS",
+                "QuestionType": "Slider",
+                "Selector": "HSLIDER",
+                "DataVisibility": {
+                    "Private": false,
+                    "Hidden": false
+                },
+                "Configuration": {
+                    "QuestionDescriptionOption": "UseText",
+                    "CSSliderMin": 1,
+                    "CSSliderMax": 5,
+                    "GridLines": 4,
+                    "NumDecimals": "0",
+                    "ShowValue": true,
+                    "SliderStartPositions": {
+                        "1": 1
+                    },
+                    "StarCount": 5,
+                    "StarType": "discrete",
+                    "SnapToGrid": true,
+                    "CustomStart": true,
+                    "NotApplicable": false,
+                    "MobileFirst": true
+                },
+                "QuestionDescription": "Listen carefully to all speech recordings below in full. Then rate how similar the accent of the...",
+                "Choices": {
+                    "1": {
+                        "Display": ""
+                    }
+                },
+                "ChoiceOrder": [
+                    1
+                ],
+                "Validation": {
+                    "Settings": {
+                        "ForceResponse": "ON",
+                        "ForceResponseType": "ON",
+                        "Type": "None"
+                    }
+                },
+                "GradingData": [],
+                "Language": [],
+                "NextChoiceId": 2,
+                "NextAnswerId": 6,
+                "Labels": {
+                    "1": {
+                        "Display": "1 - They definitely have different accents, with many noticeable differences."
+                    },
+                    "2": {
+                        "Display": "2 - They most likely have different accents, with some noticeable differences."
+                    },
+                    "3": {
+                        "Display": "3 - They may or may not have the same accent, with many subtle differences."
+                    },
+                    "4": {
+                        "Display": "4 - They most likely have the same accent, with some subtle differences."
+                    },
+                    "5": {
+                        "Display": "5 - They definitely have the same accent, with no noticeable differences."
+                    }
+                },
+                "QuestionID": "QID1",
+                "Answers": {
+                    "1": {
+                        "Display": 1
+                    },
+                    "2": {
+                        "Display": 2
+                    },
+                    "3": {
+                        "Display": 3
+                    },
+                    "4": {
+                        "Display": 4
+                    },
+                    "5": {
+                        "Display": 5
+                    }
+                }
+            }
         }
     ]
 }
