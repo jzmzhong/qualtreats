@@ -347,7 +347,7 @@ def main():
             # except for the last question (to prevent IndexError)
             mc_counter += (1 if arg == 'mc' and
                            mc_counter+1 < len(url_dict['mc']['urls']) else 0)
-            ref_counter += (1 if arg in ['mushra', 'xab', 'xabc', 'xmos', 'xcmos'] and
+            ref_counter += (1 if arg in ['mushra', 'xab', 'xabc', 'xabcd', 'xmos', 'xcmos'] and
                                ref_counter+1 < len(url_dict[arg]['urls']) else 0)
 
     # survey_length is determined by number of questions created
