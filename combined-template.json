@@ -931,6 +931,95 @@
                     }
                 }
             }
+        },
+        {
+            "SurveyID": "SV_5dLVDkYeZAKBTJY",
+            "Element": "SQ",
+            "PrimaryAttribute": "QID4",
+            "SecondaryAttribute": "Listen carefully to all speech recordings below in full. Then rate how much more or less similar...",
+            "TertiaryAttribute": null,
+            "Payload": {
+                "QuestionText": "Listen carefully to all speech recordings below in full. Then rate <i><u>how much more or less similar</u></i> recording A is in terms of <i><u>accent</u></i> to the reference speech recording, compared to recording B. A score of +2 indicates that recording A is much more similar to the reference than recording B is, whereas -2 indicates that recording B is more similar to the reference. Please disregard the mismatch in voice, gender, and audio quality.<br />\nHere is reference speech recording: <audio width=\"320\" preload=\"auto\" height=\"40\" controls=\"true\" class=\"qmedia\"><source type=\"audio/wav\" src=\"https://groups.inf.ed.ac.uk/cstr3/cvbotinh/Mushra_example/samples/MM/hvd_481.wav\"></audio><br />\nHere is speech recording A: <audio width=\"320\" preload=\"auto\" height=\"40\" controls=\"true\" class=\"qmedia\"><source type=\"audio/wav\" src=\"https://groups.inf.ed.ac.uk/cstr3/cvbotinh/Mushra_example/samples/MM/hvd_481.wav\"></audio><br />\nHere is speech recording B: <audio width=\"320\" preload=\"auto\" height=\"40\" controls=\"true\" class=\"qmedia\"><source type=\"audio/wav\" src=\"https://groups.inf.ed.ac.uk/cstr3/cvbotinh/Mushra_example/samples/MM/hvd_481.wav\"></audio>",
+                "QuestionJS": "Qualtrics.SurveyEngine.addOnload(function()\n{\n\t/*Place your JavaScript here to run when the page loads*/\n\njQuery(\"td\").css(\"border-left\",\"2px solid WhiteSmoke\");\n});\n\nQualtrics.SurveyEngine.addOnReady(function()\n{\n\t/*Place your JavaScript here to run when the page is fully displayed*/\n\n});\n\nQualtrics.SurveyEngine.addOnUnload(function()\n{\n\t/*Place your JavaScript here to run when the page is unloaded*/\n\n});",
+                "DefaultChoices": false,
+                "DataExportTag": "XCMOS",
+                "QuestionType": "Slider",
+                "Selector": "HSLIDER",
+                "DataVisibility": {
+                    "Private": false,
+                    "Hidden": false
+                },
+                "Configuration": {
+                    "QuestionDescriptionOption": "UseText",
+                    "CSSliderMin": -2,
+                    "CSSliderMax": 2,
+                    "GridLines": 4,
+                    "SnapToGrid": true,
+                    "NumDecimals": "0",
+                    "ShowValue": true,
+                    "CustomStart": true,
+                    "SliderStartPositions": {
+                        "1": 0.5
+                    },
+                    "NotApplicable": false,
+                    "MobileFirst": false
+                },
+                "QuestionDescription": "Listen carefully to all speech recordings below in full. Then rate how much more or less similar...",
+                "Choices": {
+                    "1": {
+                        "Display": ""
+                    }
+                },
+                "ChoiceOrder": [
+                    1
+                ],
+                "Validation": {
+                    "Settings": {
+                        "ForceResponse": "ON",
+                        "ForceResponseType": "ON",
+                        "Type": "None"
+                    }
+                },
+                "GradingData": [],
+                "Language": [],
+                "NextChoiceId": 2,
+                "NextAnswerId": 6,
+                "Labels": {
+                    "1": {
+                        "Display": "B is Much More Similar"
+                    },
+                    "2": {
+                        "Display": "B is Somewhat More Similar"
+                    },
+                    "3": {
+                        "Display": "A and B are Equally Similar"
+                    },
+                    "4": {
+                        "Display": "A is Somewhat More Similar"
+                    },
+                    "5": {
+                        "Display": "A is Much More Similar"
+                    }
+                },
+                "Answers": {
+                    "1": {
+                        "Display": -2
+                    },
+                    "2": {
+                        "Display": -1
+                    },
+                    "3": {
+                        "Display": 0
+                    },
+                    "4": {
+                        "Display": 1
+                    },
+                    "5": {
+                        "Display": 2
+                    }
+                },
+                "QuestionID": "QID4"
+            }
         }
     ]
 }

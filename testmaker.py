@@ -40,20 +40,25 @@ def format_urls(question_type, file_1, file_2=None, file_3=None, file_4=None):
             with open(file_2) as f2: # only -ab & -abc have >1 url file
                 # helper lambda saves some code later on "gf" means get first
                 gf = lambda x: x.split()[1]
-                if question_type == 'xab':
+                if question_type in ['xab', 'xcmos']:
                     with open(file_3) as f_ref:
                         extra = [gf(line) for line in f_ref]
                 elif question_type == 'xabc':
                     with open(file_4) as f_ref:
                         extra = [gf(line) for line in f_ref]
+                elif question_type == 'xmos':
+                    with open(file_2) as f_ref:
+                        extra = [gf(line) for line in f_ref]
                 else:
                     extra = []
-                if question_type in ['ab', 'xab']: # returns list of url pairs
-                    return [(gf(line1),gf(line2))for line1, line2 in zip(f1,f2)], extra
+                if question_type in ['ab', 'xab', 'xcmos']: # returns list of url pairs
+                    return [(gf(line1), gf(line2)) for line1, line2 in zip(f1,f2)], extra
                 elif question_type in ['abc', 'xabc']:
                     with open(file_3) as f3: # returns list of url trios & empty list
-                        return [(gf(line1),gf(line2),gf(line3))
+                        return [(gf(line1), gf(line2), gf(line3))
                                 for line1, line2, line3 in zip(f1, f2, f3)], extra
+                elif question_type == 'xmos':
+                    return [gf(line1) for line1 in f1], extra
         except:
             if question_type == 'mos' or question_type == 'trs':
                 return [l for l in f1], []
@@ -169,6 +174,10 @@ def main():
                         help="make A/B questions (like preference test) with reference speech")
     parser.add_argument("-xabc", action='store_true',
                         help="make A/B/C questions (like ranking test) with reference speech")
+    parser.add_argument("-xmos", action='store_true',
+                        help="make Mean Opinion Score questions with sliders and with reference speech")
+    parser.add_argument("-xcmos", action='store_true',
+                        help="make Comparative Mean Opinion Score questions with sliders and with reference speech")
 
     args = parser.parse_args()
 
@@ -184,6 +193,8 @@ def main():
                      'mos':[config.mos_file],
                      'xab':[config.xab_file1, config.xab_file2, config.xab_file_ref],
                      'xabc':[config.xabc_file1, config.xabc_file2, config.xabc_file3, config.xabc_file_ref],
+                     'xmos':[config.xmos_file, config.xmos_file_ref],
+                     'xcmos':[config.xcmos_file1, config.xcmos_file2, config.xcmos_file_ref],
                      }
     # create a dictionary with key=command line arg & value= output of format_urls()
     # function's arguments are taken from argument_dict
@@ -194,8 +205,7 @@ def main():
     # (for MC & trs it's the sentence text, for MUSHRA it's the reference URL)
     # split dictionary value tuples into keyyed subdictionary
     for key, value in url_dict.items():
-        url_dict[key] = {'urls' : value[0], 'extra':value[1]}
-
+        url_dict[key] = {'urls': value[0], 'extra': value[1]}
     # get sentences from file to embed in multiple choice questions
     mc_sentences = get_sentences(config.mc_sentence_file)
 
@@ -219,6 +229,8 @@ def main():
                            'mos':elements[11],
                            'xab': elements[15],
                            'xabc': elements[16],
+                           'xmos': elements[17],
+                           'xcmos': elements[18],
                            }
 
     # update multiple choice answer text in template to save computation
@@ -253,6 +265,16 @@ def main():
                                 {get_player_html('$ref_url')}",
                     'xabc': f"{config.xab_question_text}\
                                 {get_player_html('$ref_url')}",
+                    'xmos': f"{config.xmos_question_text_1}\
+                                {get_player_html('$ref_url')}\
+                                {config.xmos_question_text_2}\
+                                {get_player_html('$urls')}",
+                    'xcmos': f"{config.xcmos_question_text_1}\
+                                {get_player_html('$ref_url')}\
+                                {config.xcmos_question_text_2}\
+                                {get_player_html('$urls_a')}\
+                                {config.xcmos_question_text_3}\
+                                {get_player_html('$urls_b')}",
                   }
 
     # keys=question types and values= functions for making questions
@@ -264,6 +286,8 @@ def main():
                     'mos': None,
                     'xab': ab_q,
                     'xabc': ab_q,
+                    'xmos': None,
+                    'xcmos': None,
                     }
 
     # create list to store generated question blocks
@@ -277,7 +301,7 @@ def main():
     for arg in args:
         for n, url_set in enumerate(url_dict[arg]['urls']): # for each url set for that question type
             # get reference url if the current flag is -mushra or -xab or -xabc
-            ref_url = url_dict[arg]['extra'][ref_counter] if arg in ['mushra', 'xab', 'xabc'] else None
+            ref_url = url_dict[arg]['extra'][ref_counter] if arg in ['mushra', 'xab', 'xabc', 'xmos', 'xcmos'] else None
             # get MC sentence if the current flag == -mc
             sentence = mc_sentences[url_dict['mc']['extra'][mc_counter]] if arg == 'mc' else None
             ref_id = n*(len(url_set)+1) # unique id for every ref sample
@@ -285,7 +309,9 @@ def main():
             text = Template(q_text_dict[arg]).substitute(ref_url=ref_url,
                                                          ref_id=ref_id,
                                                          urls=url_set,
-                                                         sentence=sentence
+                                                         sentence=sentence,
+                                                         urls_a=url_set[0],
+                                                         urls_b=url_set[1],
                                                          )
             # make a new question and add it to the list of questions
             questions.append(make_question(
@@ -305,7 +331,7 @@ def main():
             # except for the last question (to prevent IndexError)
             mc_counter += (1 if arg == 'mc' and
                            mc_counter+1 < len(url_dict['mc']['urls']) else 0)
-            ref_counter += (1 if arg in ['mushra', 'xab', 'xabc'] and
+            ref_counter += (1 if arg in ['mushra', 'xab', 'xabc', 'xmos', 'xcmos'] and
                                ref_counter+1 < len(url_dict[arg]['urls']) else 0)
 
     # survey_length is determined by number of questions created
