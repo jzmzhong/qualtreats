@@ -1092,10 +1092,12 @@
                         "ExclusiveAnswer": true
                     },
                     "3": {
-                        "Display": "3rd Most Similar in Accent"
+                        "Display": "3rd Most Similar in Accent",
+                        "ExclusiveAnswer": true
                     },
                     "4": {
-                        "Display": "The Least Similar in Accent"
+                        "Display": "The Least Similar in Accent",
+                        "ExclusiveAnswer": true
                     }
                 },
                 "AnswerOrder": [
@@ -1107,7 +1109,12 @@
                 "ChoiceDataExportTags": false,
                 "AnswerColumns": 4,
                 "ClarifyingSymbolType": "None",
-                "SubSelector": "SingleAnswer"
+                "SubSelector": "SingleAnswer",
+                "Randomization": {
+                    "Advanced": null,
+                    "Type": "All",
+                    "TotalRandSubset": ""
+                }
             }
         }
     ]
