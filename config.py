@@ -58,3 +58,11 @@ mushra_ref_folder = "G1THA"
 # MC questions have sentence text embedded
 # this file should have a filename and corresponding sentence string per line
 mc_sentence_file = "resources/sentences.txt"
+
+# xab - scottish - with javascript
+xab_question_text = "Listen carefully to all speech recordings below in full. Then pick the candidate speech recording that is <i><u>more similar</u></i> in terms of <i><u>accent</u></i> to the reference speech recording. Please disregard the mismatch in voice, gender, and audio quality.<br/ >Here is the reference speech recording:"
+xab_question_text_2 = "<br/ >Here are the two candidate speech recordings to choose from."
+xab_file1 = "resources/scottish-xab-span/xab-urls-1.txt"
+xab_file2 = "resources/scottish-xab-span/xab-urls-2.txt"
+xab_file_ref = "resources/scottish-xab-span/xab-urls-ref.txt"
+mc_sentence_file = "resources/scottish-xab-span/sentences.txt"

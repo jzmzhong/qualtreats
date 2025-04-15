@@ -90,10 +90,13 @@ def format_urls(question_type, file_1, file_2=None, file_3=None, file_4=None, fi
 def get_sentences(sentence_file):
     lines = open(sentence_file, encoding="utf8").readlines()
     return {line.split(' ', 1)[0] : line.split(' ', 1)[1].replace('\n', '') for line in lines}
+def get_sentences_2(sentence_file):
+    lines = open(sentence_file, encoding="utf8").readlines()
+    return [line.split(' ', 1)[1].replace('\n', '') for line in lines]
 
 # make a new question using basis question and urls
 def make_question(qid, urls, basis_question,question_type,
-                  question_function, question_text):
+                  question_function, question_text, sentence):
     new_q = copy.deepcopy(basis_question)
     # Set the survey ID
     new_q['SurveyID'] = config.survey_id
@@ -108,6 +111,10 @@ def make_question(qid, urls, basis_question,question_type,
         question_function(new_q, urls, qid)
     except TypeError:
         pass
+    # import pdb; pdb.set_trace()
+    new_q['Payload'].update({'QuestionJS': new_q['Payload']['QuestionJS'].replace('Please call Stella.', sentence)})
+    # new_q['Payload'].update({'QuestionJS': ''})
+    # new_q['Payload'].update({'QuestionText': new_q['Payload']['QuestionText'] + "<br/ >The transcription of the recordings is provided here:\n" + sentence})
     return new_q
 
 # handler function for ab/abc questions
@@ -219,6 +226,7 @@ def main():
         url_dict[key] = {'urls': value[0], 'extra': value[1]}
     # get sentences from file to embed in multiple choice questions
     mc_sentences = get_sentences(config.mc_sentence_file)
+    xab_sentences = get_sentences_2(config.mc_sentence_file)
 
     # get json to use as basis for new questions
     basis_json = get_basis_json()
@@ -320,6 +328,7 @@ def main():
             ref_url = url_dict[arg]['extra'][ref_counter] if arg in ['mushra', 'xab', 'xabc', 'xabcd', 'xmos', 'xcmos'] else None
             # get MC sentence if the current flag == -mc
             sentence = mc_sentences[url_dict['mc']['extra'][mc_counter]] if arg == 'mc' else None
+            sentence = xab_sentences[n] if arg in ['xab', 'xmos'] else sentence
             ref_id = n*(len(url_set)+1) # unique id for every ref sample
             # embed required url or sentence into the question text
             text = Template(q_text_dict[arg]).substitute(ref_url=ref_url,
@@ -340,7 +349,8 @@ def main():
                                 question_type=arg,
                                 # handler function for that question type
                                 question_function=handler_dict[arg],
-                                question_text=text  # as set above
+                                question_text=text,  # as set above
+                                sentence=sentence,
                                 ))
             q_counter += 1
             # increment these counters when a question of that type is created
