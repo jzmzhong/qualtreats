@@ -1,4 +1,4 @@
-This is a tool for automating the process of creating online listening tests in Qualtrics. If you have any issues using it please submit here https://github.com/CSTR-Edinburgh/qualtreats/issues
+This is a tool for automating the process of creating online listening tests in Qualtrics.
 
 # Background
 This tool reduces number of manual steps required to create a functioning test. It works by generating a JSON file which Qualtrics will interpret to  produce a survey. It was originally created for use in evaluating text-to-speech systems, but has wider applications in speech technology and other audio-related fields.
@@ -32,13 +32,6 @@ It currently supports:
 - MUSHRA style questions (MUltiple Stimuli with Hidden Reference and Anchor)
 - MOS test questions (Mean Opinion Score, with 1:5 slider scale)
 
-See a demo test showcasing each question type [here](https://edinburghinformatics.eu.qualtrics.com/jfe/form/SV_0PrKc4KQ7jDXxLn).
-
-<img src="https://raw.githubusercontent.com/evelyndjwilliams/readme-gifs/main/finished-testmaker.gif" width="500" height="370">
-
-
-<br>A MUSHRA test question created using the testmaker script.
-
 # Instructions
 
 The file `help.md` contains solutions to some issues we encountered while generating surveys.
@@ -50,9 +43,7 @@ This tool only uses packages from the Python standard library.
 
 ## Getting the script
 
-Clone the <Name> GitHub repository with the command:
-
-`git clone https://github.com/CSTR-Edinburgh/qualtreats.git`
+Clone the <Name> GitHub repository.
 
 ## Configuration
 
